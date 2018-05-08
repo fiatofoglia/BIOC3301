@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules
+module load eb
+module load Miniconda2
+#loading virtualenv
+source activate qiime1
+#setting temporary directory
+export TMDIR=~/qiime_tmp
+echo “group significance ANOVA test for nitrogen levels”
+time group_significance.py -i 	~/2018_02_smb/cdout_filtered/taxa_plots/table_mc605_sorted_L2.biom -m ~/2018_02_smb/map.tsv -c SampleNitrogen -o ~/2018_02_smb/cdout_filtered/nitrogen_ocs.txt -s Kruskal_wallis --biom_samples_are_superset --print_non_overlap
+source deactivate qiime1
