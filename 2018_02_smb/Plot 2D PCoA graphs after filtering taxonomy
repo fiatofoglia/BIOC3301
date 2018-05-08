@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules
+module load eb
+module load Miniconda2
+#loading virtualenv
+source activate qiime1
+#setting temporary directory
+export TMDIR=~/qiime_tmp
+echo “plot 2D PCoA graphs after filtering taxonomy”
+time make_2d_plots.py -i ~/2018_02_smb/cdout_filtered/bdiv_even605/unweighted_unifrac_pc.txt -m ~/2018_02_smb/map.tsv -o ~/2018_02_smb/cdout_filtered/2d_plots_un/
+source deactivate qiime1
