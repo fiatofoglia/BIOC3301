@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules
+module load eb
+module load Miniconda2
+#loading virtualenv
+source activate qiime1
+#setting temporary directory
+export TMDIR=~/qiime_tmp
+echo “filtering taxonomy from OTU table”
+time compare_categories.py -i ~/2018_02_smb/cdout/taxa_plots/table_mc605_sorted_L2.biom -o ~/2018_02_smb/cdout/out_table_bac_firm_only.biom_L2 -p p__Proteobacteria,p__Acidobacteria
+source deactivate qiime1
