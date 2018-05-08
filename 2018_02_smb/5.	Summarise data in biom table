@@ -1,0 +1,1 @@
+biom summarize-table -I ~/2018_02_smb/OTU2018/otu_table.biom
