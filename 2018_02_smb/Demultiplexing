@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules
+module load eb
+module load Miniconda2
+#loading virtualenv
+source activate qiime1
+#setting temporary directory
+export TMDIR=~/qiime_tmp
+echo “Demultiplexing of fastq sequence data”
+time split_libraries_fastq.py -i ~/2018_02_smb/Joined_Reads/seqprep_assembled.fastq.gz -b ~/2018_02_smb/Joined_Reads/seqprep_assembled.fastq_barcodes.fastq  -m ~/2018_02_smb/map.tsv -o ~/2018_02_smb/slout_q20/ --rev_comp_barcode --rev_comp_mapping_barcodes -q 19
+source deactivate qiime1
