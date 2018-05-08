@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules
+module load eb
+module load Miniconda2
+#loading virtualenv
+source activate qiime1
+#setting temporary directory
+export TMDIR=~/qiime_tmp
+echo “Picking OTUs with 97% similarity from SILVA closed reference”
+time pick_closed_reference_otus.py -i ~/2018_02_smb/slout_q20/seqs.fna -r ~/SILVA_128_QIIME_release/rep_set/rep_set_all/97/97_otus.fasta -o ~/2018_02_smb/otus -t ~/SILVA_128_QIIME_release/taxonomy/taxonomy_all/97/majority_taxonomy_all_levels.txt -a -O 24
+source deactivate qiime1
